@@ -1,4 +1,6 @@
-<%= form_for @user, :url => user_path(@user), :html => { :class => "edit_user", :id => "edit_user" } do |f| -%>
-  <input name="_method" type="hidden" value="put" />
-  <%= render :partial => "form", :locals => {:f => f} %>
-<% end -%>
+<h1>Editing user</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @user %> |
+<%= link_to 'Back', users_path %>
