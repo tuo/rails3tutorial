@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   
   before_filter :signed_in_user, only: [:edit, :update, :index, :destroy, :show]
   before_filter :correct_user, only: [:edit, :update]
+  before_filter :admin_user,     only: :destroy
   
   # GET /users
   # GET /users.json
@@ -80,9 +81,11 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user = User.find(params[:id])
+    name = @user.name
     @user.destroy
 
     respond_to do |format|
+      flash[:success] = "User #{name} destroyed."
       format.html { redirect_to users_url }
       format.json { head :no_content }
     end
@@ -100,5 +103,9 @@ class UsersController < ApplicationController
       def correct_user
         @user = User.find(params[:id])
         redirect_to root_path, notice: "You're only allowed to update your profile." unless current_user?(@user)
+      end
+      
+      def admin_user
+        redirect_to(root_path), error: "Insufficient Permission" unless current_user.admin?
       end
 end

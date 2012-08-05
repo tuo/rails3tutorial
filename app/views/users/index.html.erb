@@ -1,6 +1,6 @@
 <h1>Listing users</h1>
 <%= will_paginate %>
-<table>
+<table class="table">
   <tr>
 	<th>Avatar</th>
     <th>Name</th>
@@ -17,7 +17,13 @@
     <td><%= user.email %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td>
+    	<% if current_user.admin? && !current_user?(user)%>
+			<%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+		<% else %>
+		   <B>SUPER USER</B>
+		<%end%>
+    </td>
   </tr>
 <% end %>
 </table>
