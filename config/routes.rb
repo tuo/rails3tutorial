@@ -12,6 +12,7 @@ FirstApp::Application.routes.draw do
   match '/signin', to: "sessions#new"
   match '/signout', to: "sessions#destroy", via: :delete
   resources :sessions, only: [:new, :create, :destroy]
+  resources :microposts, only: [:create, :destroy]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

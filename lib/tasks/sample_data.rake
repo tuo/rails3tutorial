@@ -11,10 +11,15 @@ namespace :db do
       password = "111222"
       User.create!(name: name, email: email, password: password, password_confirmation: password)
     end
+    users = User.all(limit:6)
+    50.times do
+      content = Faker::Lorem.sentence(5)
+      users.each { | user | user.microposts.create!(content: content)}
+    end
   end 
   
   desc "Reset the database and fill with data"
-  task :update => ["db:reset", "db:populate"] do
+  task :update => ["db:reset", "db:migrate", "db:populate"] do
     puts "database is reset"
   end
   
