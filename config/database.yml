@@ -49,9 +49,10 @@ test:
   password: 111222
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  database: rdporsche_production
-  pool: 5
-  username: postgres
-  password: 111222
+  adapter:	postgresql
+  encoding:	unicode
+  pool:	5
+  database:	d2p0nk3s0us63n
+  username:	keukpmibqamhaq
+  host:	ec2-107-22-170-102.compute-1.amazonaws.com
+  port:	5432
